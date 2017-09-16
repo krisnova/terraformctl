@@ -18,15 +18,15 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/spf13/cobra"
 	"github.com/kris-nova/kubicorn/cutil/logger"
+	"github.com/spf13/cobra"
 )
 
 var cfgFile string
 
 // RootCmd represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "kubernetes-terraform-controller",
+	Use:   "terraformctl",
 	Short: "Run terraform as cloud native infrastructure as software",
 	Long: fmt.Sprintf(`%s
 
@@ -47,5 +47,5 @@ func Execute() {
 }
 
 func init() {
-	RootCmd.PersistentFlags().IntVarP(&logger.Level)
+	RootCmd.PersistentFlags().IntVarP(&logger.Level, "verbose", "v", 4, "The logger level (0 to 4) to use with 4 being the most verbose.")
 }

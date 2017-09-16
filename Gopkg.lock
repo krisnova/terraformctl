@@ -2,6 +2,24 @@
 
 
 [[projects]]
+  name = "github.com/PuerkitoBio/purell"
+  packages = ["."]
+  revision = "0bcb03f4b4d0a9428594752bd2a3b9aa0a9d4bd4"
+  version = "v1.1.0"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/PuerkitoBio/urlesc"
+  packages = ["."]
+  revision = "de5bf2ad457846296e2031421a34e2568e304e35"
+
+[[projects]]
+  name = "github.com/emicklei/go-restful"
+  packages = [".","log"]
+  revision = "68c9750c36bb8cb433f1b88c807b4b30df4acc40"
+  version = "v2.2.1"
+
+[[projects]]
   name = "github.com/fatih/color"
   packages = ["."]
   revision = "570b54cabe6b8eb0bc2dfce68d964677d63b5260"
@@ -9,9 +27,51 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/go-openapi/jsonpointer"
+  packages = ["."]
+  revision = "779f45308c19820f1a69e9a4cd965f496e0da10f"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/go-openapi/jsonreference"
+  packages = ["."]
+  revision = "36d33bfe519efae5632669801b180bf1a245da3b"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/go-openapi/spec"
+  packages = ["."]
+  revision = "7abd5745472fff5eb3685386d5fb8bf38683154d"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/go-openapi/swag"
+  packages = ["."]
+  revision = "f3f9494671f93fcff853e3c6e9e948b3eb71e590"
+
+[[projects]]
+  name = "github.com/gogo/protobuf"
+  packages = ["proto","sortkeys"]
+  revision = "100ba4e885062801d56799d78530b73b178a78f3"
+  version = "v0.4"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/golang/glog"
+  packages = ["."]
+  revision = "23def4e6c14b4da8ac2ed8007337bc5eb5007998"
+
+[[projects]]
+  branch = "master"
   name = "github.com/golang/protobuf"
   packages = ["proto","protoc-gen-go/descriptor","ptypes","ptypes/any","ptypes/duration","ptypes/timestamp"]
   revision = "11b8df160996e00fd4b55cbaafb3d84ec6d50fa8"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/google/gofuzz"
+  packages = ["."]
+  revision = "24818f796faf91cd76ec7bddd72458fbced7a6c1"
 
 [[projects]]
   name = "github.com/inconshreveable/mousetrap"
@@ -22,7 +82,7 @@
 [[projects]]
   branch = "master"
   name = "github.com/kris-nova/kubicorn"
-  packages = ["cutil/logger"]
+  packages = ["apis/cluster","cutil/hang","cutil/logger"]
   revision = "a1c0a05eaf09f061abab63d49ec58b8d8471d7ee"
 
 [[projects]]
@@ -30,6 +90,12 @@
   name = "github.com/kris-nova/lolgopher"
   packages = ["."]
   revision = "3c01d2e17dcc957c58398ab94130f256015cfb70"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/mailru/easyjson"
+  packages = ["buffer","jlexer","jwriter"]
+  revision = "2a92e673c9a6302dd05c3a691ae1f24aef46457d"
 
 [[projects]]
   name = "github.com/mattn/go-colorable"
@@ -70,7 +136,7 @@
 [[projects]]
   branch = "master"
   name = "golang.org/x/text"
-  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
+  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable","width"]
   revision = "1cbadb444a806fd9430d14ad08967ed91da4fa0a"
 
 [[projects]]
@@ -85,9 +151,33 @@
   revision = "f92cdcd7dcdc69e81b2d7b338479a19a8723cfa3"
   version = "v1.6.0"
 
+[[projects]]
+  name = "gopkg.in/inf.v0"
+  packages = ["."]
+  revision = "3887ee99ecf07df5b447e9b00d9c0b2adaa9f3e4"
+  version = "v0.9.0"
+
+[[projects]]
+  branch = "v2"
+  name = "gopkg.in/yaml.v2"
+  packages = ["."]
+  revision = "eb3733d160e74a9c7e442f435eb3bea458e1d19f"
+
+[[projects]]
+  branch = "master"
+  name = "k8s.io/apimachinery"
+  packages = ["pkg/api/resource","pkg/apis/meta/v1","pkg/conversion","pkg/conversion/queryparams","pkg/fields","pkg/labels","pkg/runtime","pkg/runtime/schema","pkg/selection","pkg/types","pkg/util/errors","pkg/util/intstr","pkg/util/net","pkg/util/runtime","pkg/util/sets","pkg/util/validation","pkg/util/validation/field","pkg/util/wait","pkg/watch","third_party/forked/golang/reflect"]
+  revision = "1168e538ea3ccf444854d1fdd5681d2d876680a7"
+
+[[projects]]
+  branch = "master"
+  name = "k8s.io/kube-openapi"
+  packages = ["pkg/common"]
+  revision = "abfc5fbe1cf87ee697db107fdfd24c32fe4397a8"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "577b21ac2c7ea6704b7e71e04236cc858ddde4fff5f04aea2892695ddbcf4f30"
+  inputs-digest = "e32ef602869854cee44fb0f26394345c199d6030d99a299a2fd1d3f19c24c098"
   solver-name = "gps-cdcl"
   solver-version = 1
