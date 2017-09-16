@@ -74,6 +74,7 @@ func RunServer(options *ServiceOptions) error {
 	reflection.Register(server)
 
 	// Now we can run the server.
+	logger.Debug("Starting terraformctl gRPC server..")
 	if err := server.Serve(listener); err != nil {
 		return fmt.Errorf("Failed to start serving gRPC service: %v", err)
 	}

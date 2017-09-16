@@ -19,6 +19,7 @@ import (
 	"os"
 
 	"github.com/spf13/cobra"
+	"github.com/kris-nova/kubicorn/cutil/logger"
 )
 
 var cfgFile string
@@ -46,4 +47,5 @@ func Execute() {
 }
 
 func init() {
+	RootCmd.PersistentFlags().IntVarP(&logger.Level)
 }
