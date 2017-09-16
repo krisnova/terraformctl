@@ -14,7 +14,8 @@
 
 package main
 
-import "github.com/kris-nova/kubernetes-terraform-controller/cmd"
+
+import "github.com/kris-nova/terraformctl/cmd"
 
 func main() {
 	cmd.Execute()
