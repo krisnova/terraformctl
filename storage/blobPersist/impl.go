@@ -1,6 +1,7 @@
 package blobPersist
 
 import (
+	"github.com/kris-nova/terraformctl/parser"
 	"github.com/kris-nova/terraformctl/storage"
 )
 
@@ -19,4 +20,10 @@ func (c *BlobPersist) ConcurrentPersist(cacher storage.TerraformCtlCacher) (chan
 
 	}()
 	return cancelChan, nil
+}
+
+// List will return all known configurations in the cache.
+func (c *BlobPersist) List() ([]*parser.TerraformConfiguration, error) {
+	var list []*parser.TerraformConfiguration
+	return list, nil
 }

@@ -66,41 +66,56 @@ func (t *TerraformControlLoop) Run() chan error {
 		for t.options.Stop == false {
 
 			// List all known clusters
-			clusters, err := t.cacher.List()
+			configurations, err := t.cacher.List()
 			if err != nil {
 				errorChan <- fmt.Errorf("Unable to list clusters: %v", err)
 				hg.Hang()
 			}
 
 			// Reconcile each cluster with terraform
-			for _, cluster := range clusters {
+			for _, config := range configurations {
+				terraformRunner := NewTerraformRunner(config)
 
-				// Terraform configuration
-				config, err := GenerateTerraformConfigurationFileFromKubicornAPI(cluster)
+				// Check if exists
+				runApply := false
+
+				if config.GetApplyHash() == "" {
+					logger.Info("New configuration [%s]", config.Name)
+					runApply = true
+				}
+
+				//logger.Info("Found existing configuration [%s]", config.Name)
+				newHash, err := config.Hash()
 				if err != nil {
-					errorChan <- fmt.Errorf("Unable to generate terraform config for cluster [%s] with error: %v", cluster.Name, err)
+					errorChan <- fmt.Errorf("Unable to calculate hash for configuration [%s] with error: %v", config.Name, err)
 					hg.Hang()
 					continue
 				}
-
-				// Terraform variables file
-				vars, err := GenerateTerraformConfigurationFileFromKubicornAPI(cluster)
-				if err != nil {
-					errorChan <- fmt.Errorf("Unable to generate terraform config for cluster [%s] with error: %v", cluster.Name, err)
-					hg.Hang()
-					continue
+				if config.GetApplyHash() != newHash {
+					logger.Info("Delta in configuration hash [%s] [%s]", config.GetApplyHash(), newHash)
+					runApply = true
 				}
 
-				// Run the apply with Terraform
-				terraformRunner := NewTerraformRunner(config, vars)
-				err = terraformRunner.Apply()
-				if err != nil {
-					errorChan <- fmt.Errorf("Unable to run terraform apply for cluster [%s] with error: %v", cluster.Name, err)
-					hg.Hang()
-					continue
+				if runApply {
+					err = terraformRunner.Apply()
+					if err != nil {
+						errorChan <- fmt.Errorf("Unable to run terraform apply for configuration [%s] with error: %v", config.Name, err)
+						hg.Hang()
+						continue
+					}
+					applyHash, err := config.Hash()
+					if err != nil {
+						errorChan <- fmt.Errorf("Unable to calculate apply hash with error: %v", err)
+					}
+
+					// Update the hash and save
+					config.SetApplyHash(applyHash)
+					t.cacher.Lock()
+					t.cacher.Set(config.Name, config)
+					t.cacher.Unlock()
+					logger.Info("Saved configuration [%s]", config.Name)
 				}
 			}
-
 			// Reset ratio
 			hg.Ratio = 1
 		}

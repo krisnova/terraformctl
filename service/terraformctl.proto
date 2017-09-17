@@ -33,17 +33,15 @@ message GetRequest {
 
 message GetResponse {
   string name = 1;
-  string API = 2;
-  string error = 3;
+  string config = 2;
 }
 
 message SetRequest {
   string name = 1;
-  string API = 2;
+  string config = 2;
 }
 
 message SetResponse {
   string name = 1;
-  string API = 2;
-  string error = 3;
+  string config = 2;
 }

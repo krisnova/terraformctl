@@ -1,8 +1,17 @@
-# Kubernetes Terraform Controller 
+# Terraformctl
 
-Manage and mutate Kubernetes infrastructure in Azure with cloud native software built on Terraform!
+Manage and mutate infrastructure with Terraform by running it in Kubernetes as a controller!
+
+## Running
+
+### Environmental Variables
+
+`TERRAFORMCTL_HOSTNAME` can be used to override the hostname to use to connect to a listening gRPC server.
+`TERRAFORMCTL_PORT` can be used to override the port to use to connect to a listening gRPC server.
 
 ## Developing
+
+
 
 ### Working with the gRPC definitions
 

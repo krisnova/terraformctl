@@ -1,2 +1,3 @@
 .idea
 bin*
+examples/kubernetes-azure/provider.tf

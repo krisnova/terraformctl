@@ -2,6 +2,7 @@ package terraformctl
 
 import (
 	"fmt"
+	"github.com/kris-nova/kubicorn/cutil/logger"
 	"google.golang.org/grpc"
 )
 
@@ -10,7 +11,7 @@ import (
 type TerraformCtlClient struct {
 	hostname string
 	port     int
-	client   TerraformCTLAPIClient
+	Client   TerraformCTLAPIClient
 }
 
 // NewTerraformCtlClient will return a new terraformctl client that could be used to interface with a terraformctl gRPC server.
@@ -32,12 +33,13 @@ func (c *TerraformCtlClient) dialable() string {
 // Connect will attempt to open a connection to a terraformctl gRPC server and will return a client based on the
 // protobuf definition of the project.
 func (c *TerraformCtlClient) Connect() error {
+	logger.Info("Connecting to gRPC server [%s:%d]", c.hostname, c.port)
 	connection, err := grpc.Dial(c.dialable(), grpc.WithInsecure())
 	if err != nil {
 		return fmt.Errorf("Unable to connect to host [%s] with error message: %v", c.dialable(), err)
 	}
-	defer connection.Close()
+	//defer connection.Close()
 	client := NewTerraformCTLAPIClient(connection)
-	c.client = client
+	c.Client = client
 	return nil
 }
