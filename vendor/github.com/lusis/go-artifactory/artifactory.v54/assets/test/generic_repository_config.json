@@ -1,0 +1,16 @@
+{
+  "key" : "libs-release-local",
+  "rclass" : "",
+  "packageType" : "maven",
+  "description" : "Local repository for in-house libraries",
+  "notes" : "",
+  "includesPattern" : "**/*",
+  "excludesPattern" : "",
+  "repoLayoutRef" : "maven-2-default",
+  "handleReleases" : true,
+  "handleSnapshots" : false,
+  "maxUniqueSnapshots" : 0,
+  "suppressPomConsistencyChecks" : true,
+  "blackedOut" : false,
+  "propertySets" : [ "artifactory" ]
+}

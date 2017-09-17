@@ -1,0 +1,15 @@
+{
+  "key" : "libs-release",
+  "rclass" : "virtual",
+  "packageType" : "maven",
+  "description" : "",
+  "notes" : "",
+  "includesPattern" : "**/*",
+  "excludesPattern" : "",
+  "repositories" : [ "libs-release-local", "ext-release-local", "remote-repos" ],
+  "debianTrivialLayout" : false,
+  "artifactoryRequestsCanRetrieveRemoteArtifacts" : false,
+  "keyPair" : "",
+  "pomRepositoryReferencesCleanupPolicy" : "discard_active_reference",
+  "defaultDeploymentRepo" : "libs-release-local"
+}

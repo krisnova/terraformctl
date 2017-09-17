@@ -76,12 +76,13 @@ func (t *TerraformControlLoop) Run() chan error {
 			for _, config := range configurations {
 				terraformRunner := NewTerraformRunner(config)
 
+
 				// Check if exists
-				runApply := false
+				runReconcile := false
 
 				if config.GetApplyHash() == "" {
 					logger.Info("New configuration [%s]", config.Name)
-					runApply = true
+					runReconcile = true
 				}
 
 				//logger.Info("Found existing configuration [%s]", config.Name)
@@ -93,11 +94,11 @@ func (t *TerraformControlLoop) Run() chan error {
 				}
 				if config.GetApplyHash() != newHash {
 					logger.Info("Delta in configuration hash [%s] [%s]", config.GetApplyHash(), newHash)
-					runApply = true
+					runReconcile = true
 				}
 
-				if runApply {
-					err = terraformRunner.Apply()
+				if runReconcile {
+					err = terraformRunner.Reconcile()
 					if err != nil {
 						errorChan <- fmt.Errorf("Unable to run terraform apply for configuration [%s] with error: %v", config.Name, err)
 						hg.Hang()

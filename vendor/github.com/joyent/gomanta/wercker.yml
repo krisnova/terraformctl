@@ -1,0 +1,35 @@
+box: golang
+
+build:
+  steps:
+    # Sets the go workspace and places you package
+    # at the right place in the workspace tree
+    - setup-go-workspace:
+        package-dir: github.com/joyent/gomanta
+
+    # Gets the dependencies
+    - script:
+        name: go get
+        code: |
+          go get -v -t ./...
+
+    # Build the project
+    - script:
+        name: go build
+        code: |
+          go build ./...
+
+    - script:
+        name: make a new key for testing
+        code: |
+          ssh-keygen -b 2048 \
+                     -C "Testing Key" \
+                     -f /root/.ssh/id_rsa \
+                     -t rsa \
+                     -P ""
+
+    # Test the project
+    - script:
+        name: go test
+        code: |
+          go test ./...

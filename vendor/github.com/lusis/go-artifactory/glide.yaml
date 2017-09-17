@@ -1,0 +1,12 @@
+package: github.com/lusis/go-artifactory
+import:
+- package: github.com/olekukonko/tablewriter
+- package: gopkg.in/alecthomas/kingpin.v2
+- package: github.com/coreos/go-semver
+  version: ^0.2.0
+  subpackages:
+  - semver
+testImport:
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert

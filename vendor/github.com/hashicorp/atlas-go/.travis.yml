@@ -1,0 +1,13 @@
+sudo: false
+
+language: go
+
+go:
+  - 1.7
+  - 1.8
+
+branches:
+  only:
+    - master
+
+script: make deps test

@@ -74,6 +74,9 @@ func NewTerraformConfigurationFromPath(name, path string) (*TerraformConfigurati
 		}
 		tfBytes = append(tfBytes, bytes...)
 	}
+	if len(tfBytes) == 0 {
+		return nil, fmt.Errorf("No valid configuration files found in [%s]", path)
+	}
 	return &TerraformConfiguration{
 		Name:    name,
 		tfBytes: tfBytes,

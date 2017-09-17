@@ -1,0 +1,5 @@
+#!/bin/bash
+go get github.com/axw/gocov/gocov
+
+
+gocov test ./artifactory.v51 | gocov report

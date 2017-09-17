@@ -1,0 +1,7 @@
+{
+  "name" : "docker-readers",
+  "description" : "Can read from Docker repositories",
+  "autoJoin" : false,
+  "realm" : "artifactory",
+  "realmAttributes": "Realm attributes for use by LDAP"
+}

@@ -1,0 +1,10 @@
+{
+  "repositories": [
+    "docker-dev",
+    "docker-test",
+    "docker-stage",
+    "docker-prod",
+    "hello-world",
+    "hello-cloud"
+  ]
+}

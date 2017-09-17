@@ -29,7 +29,12 @@ import (
 var setCmd = &cobra.Command{
 	Use:   "set",
 	Short: "Set a new configuration definition in terraformctl",
-	Long:  ``,
+	Long:  `Set allows a user to take a directory or file on their local filesystem and
+set the configuration in the terraformctl server for processing.
+Think of this command as very similar to "terraform apply" but with
+the work being done on a remote host.
+
+`,
 	Run: func(cmd *cobra.Command, args []string) {
 		seto.RootOptions = *ro
 		err := RunSet(seto)
@@ -57,7 +62,7 @@ type SetOptions struct {
 var seto = &SetOptions{}
 
 func RunSet(options *SetOptions) error {
-	logger.Info("Using name [%s]", options.Name)
+	logger.Info("Setting configuration using name [%s]", options.Name)
 	client := terraformctl.NewTerraformCtlClient(options.Hostname, options.Port)
 	err := client.Connect()
 	if err != nil {
