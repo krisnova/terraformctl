@@ -44,7 +44,7 @@ func (t *TerraformRunner) Reconcile() error {
 	// -----------------------------------------------------------------------------------------------------------------
 	// Init
 	// ----
-	err = terraform.NewTerraformCommand([]string{
+	exitCode, err := terraform.NewTerraformCommand([]string{
 		"init", // Subcommand
 		fpath,  // Directory
 	}).Run()

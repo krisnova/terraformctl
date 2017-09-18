@@ -25,11 +25,11 @@ const (
 	EnvCLI = "TF_CLI_ARGS"
 )
 
-func main() {
-	// Override global prefix set by go-dynect during init()
-	log.SetPrefix("")
-	os.Exit(realMain())
-}
+//func main() {
+//	// Override global prefix set by go-dynect during init()
+//	log.SetPrefix("")
+//	os.Exit(realMain())
+//}
 
 func realMain() int {
 	var wrapConfig panicwrap.WrapConfig
@@ -100,9 +100,9 @@ func wrappedMain() int {
 	defer terraform.CloseDebugInfo()
 
 	log.SetOutput(os.Stderr)
-	log.Printf(
-		"[INFO] Terraform version: %s %s %s",
-		Version, VersionPrerelease, GitCommit)
+	//log.Printf(
+	//	"[INFO] Terraform version: %s %s %s",
+	//	Version, VersionPrerelease, GitCommit)
 	log.Printf("[INFO] Go runtime version: %s", runtime.Version())
 	log.Printf("[INFO] CLI args: %#v", os.Args)
 
