@@ -9,6 +9,10 @@ import (
 	"os"
 )
 
+const (
+	GenerateTempDir = true
+)
+
 // TerraformRunner maps a terraformctl TerraformConfiguration to the TerraformSDK
 type TerraformRunner struct {
 	configuration *parser.TerraformConfiguration
@@ -27,17 +31,24 @@ func (t *TerraformRunner) Reconcile() error {
 	logger.Info("Calling Terraform apply on configuration [%s]", t.configuration.Name)
 
 	// Init a temp directory with our terraform configuration.
-	fpath := os.TempDir() + "/main.tf"
+	//tmpDir := "/tmp/reconcile"
+	var tmpDir string
+	if GenerateTempDir {
+		tmpDir = os.TempDir()
+	} else {
+		tmpDir = "tmp/terraformctl"
+	}
+	fpath := tmpDir + "/main.tf"
 	f, err := os.Create(fpath)
 	if err != nil {
 		return fmt.Errorf("Unable to write temp file: %v", err)
 	}
 
 	// Write the main.tf file
-	bytes, err := t.configuration.Bytes()
-	if err != nil {
-		return fmt.Errorf("Unable to read bytes for Terraform configuration: %v", err)
-	}
+	bytes := t.configuration.TfBytes()
+	//if err != nil {
+	//	return fmt.Errorf("Unable to read bytes for Terraform configuration: %v", err)
+	//}
 	ioutil.WriteFile(fpath, bytes, 0664)
 	f.Close()
 
@@ -45,8 +56,9 @@ func (t *TerraformRunner) Reconcile() error {
 	// Init
 	// ----
 	exitCode, err := terraform.NewTerraformCommand([]string{
-		"init", // Subcommand
-		fpath,  // Directory
+		"terraform", // Terraform
+		"init",      // Subcommand
+		tmpDir,      // Directory
 	}).Run()
 
 	logger.Debug("Exit code: %d", exitCode)

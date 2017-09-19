@@ -20,8 +20,7 @@ import (
 	"sync/atomic"
 	"syscall"
 	"time"
-
-	"github.com/kardianos/osext"
+	//"github.com/kardianos/osext"
 )
 
 const (
@@ -118,10 +117,10 @@ func Wrap(c *WrapConfig) (int, error) {
 	}
 
 	// Get the path to our current executable
-	exePath, err := osext.Executable()
-	if err != nil {
-		return -1, err
-	}
+	//exePath, err := osext.Executable()
+	//if err != nil {
+	//	return -1, err
+	//}
 
 	// Pipe the stderr so we can read all the data as we look for panics
 	stderr_r, stderr_w := io.Pipe()
@@ -154,7 +153,7 @@ func Wrap(c *WrapConfig) (int, error) {
 	// set the environmental variable to include our cookie. We also
 	// set stdin/stdout to match the config. Finally, we pipe stderr
 	// through ourselves in order to watch for panics.
-	cmd := exec.Command(exePath, os.Args[1:]...)
+	cmd := exec.Command("terraform", os.Args[1:]...)
 	cmd.Env = append(os.Environ(), c.CookieKey+"="+c.CookieValue)
 	cmd.Stdin = os.Stdin
 	cmd.Stdout = stdout_w

@@ -111,6 +111,11 @@ func (t *TerraformConfiguration) String() (string, error) {
 	return string(bytes), nil
 }
 
+// TfBytes returns the raw Terraform configuration as a slice of bytes. Note this is NOT the byte string for the object for the gRPC transaction.
+func (t *TerraformConfiguration) TfBytes() []byte {
+	return t.tfBytes
+}
+
 func (t *TerraformConfiguration) Hash() (string, error) {
 	hash, err := hashstructure.Hash(t, nil)
 	if err != nil {
