@@ -26,4 +26,10 @@ build: ## Build the docker container locally
 .PHONY: push
 push: ## Push the docker container up to a docker registry
 	docker push ${IMAGE}
-	docker push ${IMAG_SHA}
+	#docker push ${IMAG_SHA}
+
+deploy: ## Deploy the freshly build docker container to Kubernetes
+	-helm delete terraformctl --purge
+	-helm delete nginx --purge
+	helm install chart/terraformctl --name terraformctl
+	helm install stable/nginx-ingress --name nginx

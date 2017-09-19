@@ -1,9 +1,9 @@
 # Default values for golang.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-replicaCount: 2
+replicaCount: 1
 image:
-  repository: hub.docker.com/r/krisnova/terraformctl
+  repository: krisnova/terraformctl
   tag: latest
   pullPolicy: Always
 service:

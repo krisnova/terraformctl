@@ -1,8 +1,0 @@
-[environments]
-  [environments.development]
-    name = "elder-seal"
-    namespace = "default"
-    wait = false
-    watch = false
-    watch_delay = 2
-= 2
