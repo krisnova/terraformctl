@@ -13,7 +13,7 @@ import (
 // TestBackendConfig validates and configures the backend with the
 // given configuration.
 func TestBackendConfig(t *testing.T, b Backend, c map[string]interface{}) Backend {
-	t.Helper()
+	//t.Helper()
 
 	// Get the proper config structure
 	rc, err := config.NewRawConfig(c)
@@ -47,7 +47,7 @@ func TestBackendConfig(t *testing.T, b Backend, c map[string]interface{}) Backen
 // If you want to test locking, two backends must be given. If b2 is nil,
 // then state locking won't be tested.
 func TestBackend(t *testing.T, b1, b2 Backend) {
-	t.Helper()
+	//t.Helper()
 
 	testBackendStates(t, b1)
 
@@ -57,7 +57,7 @@ func TestBackend(t *testing.T, b1, b2 Backend) {
 }
 
 func testBackendStates(t *testing.T, b Backend) {
-	t.Helper()
+	//t.Helper()
 
 	states, err := b.States()
 	if err == ErrNamedStatesNotSupported {
@@ -237,7 +237,7 @@ func testBackendStates(t *testing.T, b Backend) {
 }
 
 func testBackendStateLock(t *testing.T, b1, b2 Backend) {
-	t.Helper()
+	//t.Helper()
 
 	// Get the default state for each
 	b1StateMgr, err := b1.State(DefaultStateName)

@@ -207,10 +207,10 @@ func (p *parser) parseTernaryCond() (ast.Node, error) {
 	var cond, trueExpr, falseExpr ast.Node
 	var err error
 
-	cond, err = p.parseBinaryOps(binaryOps)
-	if err != nil {
-		return nil, err
-	}
+	//cond, err = p.parseBinaryOps()
+	//if err != nil {
+	//	return nil, err
+	//}
 
 	next := p.peeker.Peek()
 	if next.Type != scanner.QUESTION {

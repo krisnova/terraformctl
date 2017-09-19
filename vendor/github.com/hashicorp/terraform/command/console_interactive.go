@@ -19,10 +19,10 @@ import (
 func (c *ConsoleCommand) modeInteractive(session *repl.Session, ui cli.Ui) int {
 	// Configure input
 	l, err := readline.NewEx(wrappedreadline.Override(&readline.Config{
-		Prompt:            "> ",
-		InterruptPrompt:   "^C",
-		EOFPrompt:         "exit",
-		HistorySearchFold: true,
+		Prompt:          "> ",
+		InterruptPrompt: "^C",
+		EOFPrompt:       "exit",
+		//	HistorySearchFold: true,
 	}))
 	if err != nil {
 		c.Ui.Error(fmt.Sprintf(

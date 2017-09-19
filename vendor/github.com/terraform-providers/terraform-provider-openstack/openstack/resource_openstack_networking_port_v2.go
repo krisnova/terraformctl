@@ -150,7 +150,7 @@ func resourceNetworkingPortV2Create(d *schema.ResourceData, meta interface{}) er
 			MACAddress:          d.Get("mac_address").(string),
 			TenantID:            d.Get("tenant_id").(string),
 			DeviceOwner:         d.Get("device_owner").(string),
-			SecurityGroups:      resourcePortSecurityGroupsV2(d),
+			//SecurityGroups:      resourcePortSecurityGroupsV2(d),
 			DeviceID:            d.Get("device_id").(string),
 			FixedIPs:            resourcePortFixedIpsV2(d),
 			AllowedAddressPairs: resourceAllowedAddressPairsV2(d),
@@ -241,8 +241,8 @@ func resourceNetworkingPortV2Update(d *schema.ResourceData, meta interface{}) er
 	// to "null", which has been reported to cause problems in vendor-modified
 	// OpenStack clouds. Therefore, we must set them in each request update.
 	updateOpts := ports.UpdateOpts{
-		AllowedAddressPairs: resourceAllowedAddressPairsV2(d),
-		SecurityGroups:      resourcePortSecurityGroupsV2(d),
+		//AllowedAddressPairs: resourceAllowedAddressPairsV2(d),
+		//SecurityGroups:      resourcePortSecurityGroupsV2(d),
 	}
 
 	if d.HasChange("name") {

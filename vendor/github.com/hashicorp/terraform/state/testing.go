@@ -11,7 +11,7 @@ import (
 // that the given implementation is pre-loaded with the TestStateInitial
 // state.
 func TestState(t *testing.T, s State) {
-	t.Helper()
+	//t.Helper()
 
 	if err := s.RefreshState(); err != nil {
 		t.Fatalf("err: %s", err)

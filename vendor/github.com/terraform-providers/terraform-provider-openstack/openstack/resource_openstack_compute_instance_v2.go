@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/gophercloud/gophercloud"
-	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/availabilityzones"
+	//"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/availabilityzones"
 	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/bootfromvolume"
 	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/keypairs"
 	"github.com/gophercloud/gophercloud/openstack/compute/v2/extensions/schedulerhints"
@@ -555,7 +555,7 @@ func resourceComputeInstanceV2Read(d *schema.ResourceData, meta interface{}) err
 	// Build a custom struct for the availability zone extension
 	var serverWithAZ struct {
 		servers.Server
-		availabilityzones.ServerExt
+		//availabilityzones.ServerExt
 	}
 
 	// Do another Get so the above work is not disturbed.
@@ -565,7 +565,7 @@ func resourceComputeInstanceV2Read(d *schema.ResourceData, meta interface{}) err
 	}
 
 	// Set the availability zone
-	d.Set("availability_zone", serverWithAZ.AvailabilityZone)
+	//d.Set("availability_zone", serverWithAZ.AvailabilityZone)
 
 	// Set the region
 	d.Set("region", GetRegion(d, config))

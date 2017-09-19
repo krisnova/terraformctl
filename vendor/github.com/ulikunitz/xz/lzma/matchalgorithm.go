@@ -45,8 +45,8 @@ func (a MatchAlgorithm) new(dictCap int) (m matcher, err error) {
 	switch a {
 	case HashTable4:
 		return newHashTable(dictCap, 4)
-	case BinaryTree:
-		return newBinTree(dictCap)
+	//case BinaryTree:
+	//	return newBinTree(dictCap)
 	}
 	return nil, errUnsupportedMatchAlgorithm
 }

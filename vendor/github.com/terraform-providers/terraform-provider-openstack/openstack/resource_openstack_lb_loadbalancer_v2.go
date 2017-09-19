@@ -269,7 +269,7 @@ func resourceLoadBalancerV2SecurityGroups(networkingClient *gophercloud.ServiceC
 	if vipPortID != "" {
 		if _, ok := d.GetOk("security_group_ids"); ok {
 			updateOpts := ports.UpdateOpts{
-				SecurityGroups: resourcePortSecurityGroupsV2(d),
+				//SecurityGroups: resourcePortSecurityGroupsV2(d),
 			}
 
 			log.Printf("[DEBUG] Adding security groups to loadbalancer "+

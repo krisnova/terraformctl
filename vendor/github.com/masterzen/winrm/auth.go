@@ -8,7 +8,7 @@ import (
 	"time"
 
 	"github.com/masterzen/azure-sdk-for-go/core/http"
-	"github.com/masterzen/azure-sdk-for-go/core/tls"
+	//"github.com/masterzen/azure-sdk-for-go/core/tls"
 
 	"github.com/masterzen/winrm/soap"
 )
@@ -18,17 +18,17 @@ type ClientAuthRequest struct {
 }
 
 func (c *ClientAuthRequest) Transport(endpoint *Endpoint) error {
-	cert, err := tls.X509KeyPair(endpoint.Cert, endpoint.Key)
-	if err != nil {
-		return err
-	}
+	//cert, err := tls.X509KeyPair(endpoint.Cert, endpoint.Key)
+	//if err != nil {
+	//	return err
+	//}
 
 	transport := &http.Transport{
 		Proxy: http.ProxyFromEnvironment,
-		TLSClientConfig: &tls.Config{
-			InsecureSkipVerify: endpoint.Insecure,
-			Certificates:       []tls.Certificate{cert},
-		},
+		//TLSClientConfig: &tls.Config{
+		//	InsecureSkipVerify: endpoint.Insecure,
+		//	Certificates:       []tls.Certificate{cert},
+		//},
 		Dial: (&net.Dialer{
 			Timeout:   30 * time.Second,
 			KeepAlive: 30 * time.Second,

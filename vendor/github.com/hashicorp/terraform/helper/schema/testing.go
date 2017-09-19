@@ -10,7 +10,7 @@ import (
 // TestResourceDataRaw creates a ResourceData from a raw configuration map.
 func TestResourceDataRaw(
 	t *testing.T, schema map[string]*Schema, raw map[string]interface{}) *ResourceData {
-	t.Helper()
+	//t.Helper()
 
 	c, err := config.NewRawConfig(raw)
 	if err != nil {

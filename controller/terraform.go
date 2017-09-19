@@ -49,5 +49,7 @@ func (t *TerraformRunner) Reconcile() error {
 		fpath,  // Directory
 	}).Run()
 
+	logger.Debug("Exit code: %d", exitCode)
+
 	return nil
 }
