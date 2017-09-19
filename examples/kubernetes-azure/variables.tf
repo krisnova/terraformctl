@@ -5,6 +5,7 @@
 
 variable "resource_group" {
   description = "The name of the resource group in which to create the virtual network."
+  default = "knovahashiconf"
 }
 
 variable "location" {
@@ -19,6 +20,7 @@ variable "storage_account_type" {
 
 variable "hostname" {
   description = "A string that determines the hostname/IP address of the origin server. This string could be a domain name, IPv4 address or IPv6 address."
+  default = "knovahashiconf"
 }
 
 variable "vm_sku" {
@@ -43,6 +45,7 @@ variable "image_offer" {
 
 variable "vmss_name" {
   description = "String used as a base for naming resources. Must be 3-61 characters in length and globally unique across Azure. A hash is prepended to this string for some resources, and resource-specific information is appended."
+  default = "knova"
 }
 
 variable "instance_count" {
@@ -52,8 +55,10 @@ variable "instance_count" {
 
 variable "admin_username" {
   description = "Admin username on all VMs."
+  default = "kris"
 }
 
 variable "admin_password" {
   description = "Admin password on all VMs."
+  default = "Charlie!"
 }

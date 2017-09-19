@@ -16,6 +16,7 @@ const (
 // TerraformRunner maps a terraformctl TerraformConfiguration to the TerraformSDK
 type TerraformRunner struct {
 	configuration *parser.TerraformConfiguration
+
 }
 
 // NewTerraformRunner initializes a new TerraformRunner struct with specified configuration.
@@ -60,8 +61,37 @@ func (t *TerraformRunner) Reconcile() error {
 		"init",      // Subcommand
 		tmpDir,      // Directory
 	}).Run()
+	if exitCode != 0 {
+		return fmt.Errorf("Failed terraform init [%d] see logs", exitCode)
+	}
 
-	logger.Debug("Exit code: %d", exitCode)
+	// -----------------------------------------------------------------------------------------------------------------
+	// Plan
+	// ----
+	exitCode, err = terraform.NewTerraformCommand([]string{
+		"terraform", // Terraform
+		"plan",      // Subcommand
+		tmpDir,      // Directory
+	}).Run()
+	if exitCode != 0 {
+		return fmt.Errorf("Failed terraform plan [%d] see logs", exitCode)
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+	// Apply
+	// ----
+	exitCode, err = terraform.NewTerraformCommand([]string{
+		"terraform", // Terraform
+		"apply",     // Subcommand
+		tmpDir,      // Directory
+	}).Run()
+	if exitCode != 0 {
+		return fmt.Errorf("Failed terraform apply [%d] see logs", exitCode)
+	}
+
+	// -----------------------------------------------------------------------------------------------------------------
+	// State
+	// ----
 
 	return nil
 }

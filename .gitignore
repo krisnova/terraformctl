@@ -1,3 +1,6 @@
 .idea
 bin*
 examples/kubernetes-azure/provider.tf
+terraform.tfstate
+terraform.tfstate.backup
+.terraform*

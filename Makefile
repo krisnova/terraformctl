@@ -1,5 +1,7 @@
 VERSION=$(shell cat VERSION)
 GIT_SHA=$(shell git rev-parse --verify HEAD)
+IMAGE=krisnova/terraformctl:latest
+IMAG_SHA=krisnova/terraformctl:${GIT_SHA}
 
 default: compile
 all: default install
@@ -16,3 +18,12 @@ proto: ## Generate the gRPC Go code from the protobuf definition in the service 
 .PHONY: help
 help:  ## Show help messages for make targets
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[32m%-30s\033[0m %s\n", $$1, $$2}'
+
+build: ## Build the docker container locally
+	docker build -t ${IMAGE} .
+	docker tag ${IMAGE} ${IMAG_SHA}
+
+.PHONY: push
+push: ## Push the docker container up to a docker registry
+	docker push ${IMAGE}
+	docker push ${IMAG_SHA}

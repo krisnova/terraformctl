@@ -2,6 +2,11 @@
 
 Manage and mutate infrastructure with Terraform by running it in Kubernetes as a controller!
 
+## About
+
+This is an example of infrastructure as cloud native software.
+This repository is not intended to be used in production, but rather offers a starting point for people to start looking at what it would take to run infrastructure as software.
+
 ## Running
 
 ### Environmental Variables
