@@ -9,6 +9,8 @@ This repository is not intended to be used in production, but rather offers a st
 
 More information can be found on my blog [here](http://www.nivenly.com/i-ran-terraform-in-kubernetes/)
 
+<p align="center"><img src="diagram1.png" width="360"></p>
+
 ## Running
 
 ### Environmental Variables
