@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/go-plugin"
 	"github.com/hashicorp/terraform/helper/logging"
 	"github.com/hashicorp/terraform/terraform"
+	"github.com/kris-nova/kubicorn/cutil/logger"
 	"github.com/mattn/go-colorable"
 	"github.com/mattn/go-shellwords"
 	"github.com/mitchellh/cli"
@@ -32,6 +33,7 @@ const (
 //}
 
 func realMain() int {
+	logger.Debug("Starting to process with Terraform..")
 	var wrapConfig panicwrap.WrapConfig
 
 	// don't re-exec terraform as a child process for easier debugging
@@ -40,6 +42,7 @@ func realMain() int {
 	}
 
 	if !panicwrap.Wrapped(&wrapConfig) {
+		logger.Debug("Entering Terraform panic wrapping logic..")
 		// Determine where logs should go in general (requested by the user)
 		logWriter, err := logging.LogOutput()
 		if err != nil {
@@ -72,6 +75,7 @@ func realMain() int {
 		exitStatus, err := panicwrap.Wrap(&wrapConfig)
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "Couldn't start Terraform: %s", err)
+			logger.Critical(err.Error())
 			return 1
 		}
 
@@ -82,7 +86,7 @@ func realMain() int {
 
 			// Wait for the output copying to finish
 			<-doneCh
-
+			logger.Critical("Invalid exit status from panic wrapping!")
 			return exitStatus
 		}
 

@@ -8,7 +8,7 @@ image:
   pullPolicy: Always
 service:
   name: terraformctl
-  type: ClusterIP
+  type: LoadBalancer
   externalPort: 4392
   internalPort: 4392
 resources:
@@ -20,4 +20,4 @@ resources:
     memory: 128Mi
 basedomain: kubecuddle.com
 ingress:
-  enabled: true
+  enabled: false

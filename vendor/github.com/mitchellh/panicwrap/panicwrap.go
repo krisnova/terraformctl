@@ -21,6 +21,7 @@ import (
 	"syscall"
 	"time"
 	//"github.com/kardianos/osext"
+	"github.com/kris-nova/kubicorn/cutil/logger"
 )
 
 const (
@@ -153,6 +154,7 @@ func Wrap(c *WrapConfig) (int, error) {
 	// set the environmental variable to include our cookie. We also
 	// set stdin/stdout to match the config. Finally, we pipe stderr
 	// through ourselves in order to watch for panics.
+	logger.Debug("Starting subcommand forking")
 	cmd := exec.Command("terraform", os.Args[1:]...)
 	cmd.Env = append(os.Environ(), c.CookieKey+"="+c.CookieValue)
 	cmd.Stdin = os.Stdin
@@ -166,6 +168,7 @@ func Wrap(c *WrapConfig) (int, error) {
 	}
 
 	if err := cmd.Start(); err != nil {
+		logger.Critical(err.Error())
 		return 1, err
 	}
 
@@ -195,12 +198,15 @@ func Wrap(c *WrapConfig) (int, error) {
 	}()
 
 	if err := cmd.Wait(); err != nil {
+		logger.Debug("Waiting for command..")
 		exitErr, ok := err.(*exec.ExitError)
 		if !ok {
 			// This is some other kind of subprocessing error.
+			logger.Critical(err.Error())
 			return 1, err
 		}
-
+		logger.Critical(string(exitErr.Stderr))
+		logger.Critical(string(exitErr.Error()))
 		exitStatus := 1
 		if status, ok := exitErr.Sys().(syscall.WaitStatus); ok {
 			exitStatus = status.ExitStatus()

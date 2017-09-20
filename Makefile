@@ -30,6 +30,9 @@ push: ## Push the docker container up to a docker registry
 
 deploy: ## Deploy the freshly build docker container to Kubernetes
 	-helm delete terraformctl --purge
-	-helm delete nginx --purge
 	helm install chart/terraformctl --name terraformctl
+
+
+ingress: ## Deploy the ingress controller
+	-helm delete nginx --purge
 	helm install stable/nginx-ingress --name nginx
