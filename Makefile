@@ -7,7 +7,7 @@ default: compile
 all: default install
 
 compile: ## Create the terraformctl executable in the ./bin directory.
-	go build -o bin/terraformctl -ldflags "-X github.com/kris-nova/terraformctl/cmd.GitSha=${GIT_SHA} -X github.com/kris-nova/terraformctl/cmd.Version=${VERSION}" main.go
+	/usr/local/go/bin/go build -o bin/terraformctl -ldflags "-X github.com/kris-nova/terraformctl/cmd.GitSha=${GIT_SHA} -X github.com/kris-nova/terraformctl/cmd.Version=${VERSION}" main.go
 
 install: ## Create the terraformctl executable in $GOPATH/bin directory.
 	install -m 0755 bin/terraformctl ${GOPATH}/bin/terraformctl
